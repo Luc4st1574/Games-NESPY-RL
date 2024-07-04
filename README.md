@@ -60,7 +60,7 @@ If TensorDict and TorchRL does not get installed from `requirements.txt`, just r
 pip install git+https://github.com/pytorch-labs/tensordict
 ```
 
--TorchRL
+- TorchRL
 
 ```shell
 pip install git+https://github.com/pytorch/rl
