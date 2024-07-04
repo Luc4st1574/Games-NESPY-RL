@@ -38,7 +38,7 @@ This are the game available in the project (More coming soon!!!)
 
 # Usage
 
-Just clone the repo `Games-NESPY-RL` from `github`:
+Just clone the repo `Games-NESPY-RL` from `github` and run the main.py file:
 
 ```shell
 git clone https://github.com/Luc4st1574/Games-NESPY-RL
