@@ -1,0 +1,9 @@
+torch
+gym
+gym_super_mario_bros
+gym_zelda_1
+gym_tetris
+nes-py
+numpy
+tensordict
+torchrl
