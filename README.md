@@ -35,3 +35,30 @@ This are the game available in the project (More coming soon!!!)
         </td>
     </tr>
 </table>
+
+# Usage
+
+Just clone the repo `Games-NESPY-RL` from `github`:
+
+```shell
+git clone https://github.com/Luc4st1574/Games-NESPY-RL
+```
+
+# Requirements
+
+Use the requirements.txt in order to get all the used dependencies
+
+```shell
+pip install requirements.txt
+```
+
+Now just enjoy your ai training with the repo
+
+# Recomendation
+
+Train your ai inside a codespace in order to use github's machine power
+
+```shell
+Create Your code inside the `<CODE>` button
+```
+
