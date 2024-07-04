@@ -48,6 +48,12 @@ git clone https://github.com/Luc4st1574/Games-NESPY-RL
 
 Use the requirements.txt in order to get all the used dependencies
 
+```shell
+pip install requirements.txt
+```
+
+If TensorDict and TorchRL does not get installed from `requirements.txt`, just run this comands on your bash
+
 - TensorDict
 
 ```shell
@@ -58,11 +64,6 @@ pip install git+https://github.com/pytorch-labs/tensordict
 
 ```shell
 pip install git+https://github.com/pytorch/rl
-```
-
-If TensorDict and TorchRL does not get installed from `requirements.txt`, just run this comands on your bash
-```shell
-pip install requirements.txt
 ```
 
 Now just enjoy your ai training with the repo
