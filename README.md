@@ -49,7 +49,7 @@ git clone https://github.com/Luc4st1574/Games-NESPY-RL
 Use the requirements.txt in order to get all the used dependencies
 
 ```shell
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 If TensorDict and TorchRL does not get installed from `requirements.txt`, just run this comands on your bash
