@@ -7,8 +7,6 @@ import os
 #state = 4 frames stacked together
 #cnn convolutional neural network
 
-# 5 = Na OF THE OUTPUT
-
 EPOCH = 50000
 TRAIN = True
 CKPT = 5000
@@ -44,4 +42,5 @@ def main():
         print("Game setup failed. Please select a valid game.")
 
 if __name__ == "__main__":
+    # Run the main function
     main()
