@@ -8,3 +8,5 @@ numpy
 tensordict
 torchrl
 lz4
+nes_py
+pygame

@@ -53,7 +53,7 @@ class Agent:
                                                     epsilon=1.0, 
                                                     eps_decay=0.99999975, 
                                                     eps_min=0.1, 
-                                                    replay_buffer_capacity=10_000, #100000
+                                                    replay_buffer_capacity=10000, #100000
                                                     batch_size=32, 
                                                     sync_network_rate=10000):
         
