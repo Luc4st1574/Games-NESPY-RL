@@ -7,7 +7,7 @@
 
 This is a Reinforcement Learning repository, using nespy wrappers in order to get your own ai model to learn to play a bunch of games from the nes, like mario bros 1 and 2, The legend of Zelda and Tetris
 
-This project uses the [NES-PY](https://github.com/Kautenja/nes-py) emulater and the gym enviroments from [Kautenja](https://github.com/Kautenja), so please follow him for more.
+This project uses the [NES-PY](https://github.com/Kautenja/nes-py) emulator and the gym enviroments from [Kautenja](https://github.com/Kautenja), so please follow him for more.
 
 This are the game available in the project (More coming soon!!!)
 <table align="center">
