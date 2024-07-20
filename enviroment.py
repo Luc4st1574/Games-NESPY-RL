@@ -1,6 +1,8 @@
 # Import necessary libraries
 from nes_py.wrappers import JoypadSpace
 import os
+import signal
+import sys
 
 def initialize_agent(agent, SHOULD_TRAIN, model_path, folder_name="", ckpt_name=""):
     if not SHOULD_TRAIN:
@@ -30,17 +32,33 @@ def save_model(agent, model_path, episode_num):
     agent.save_model(os.path.join(model_path, "model_" + str(episode_num) + "_iter.pt"))
 
 def train_agent(agent, env, num_episodes, model_path, SHOULD_TRAIN, CKPT_SAVE_INTERVAL):
-    for i in range(num_episodes):
-        print("Episode:", i)
-        total_reward = run_episode(env, agent, SHOULD_TRAIN)
-        print("Total reward:", total_reward, "Epsilon:", agent.epsilon, 
-            "Size of replay buffer:", len(agent.replay_buffer), 
-            "Learn step counter:", agent.learn_step_counter)
+    def save_and_exit(signal, frame):
+        print("\nSignal received. Saving model...")
+        save_model(agent, model_path, "final")
+        env.close()
+        sys.exit(0)
 
-        if SHOULD_TRAIN and (i + 1) % CKPT_SAVE_INTERVAL == 0:
-            save_model(agent, model_path, i + 1)
+    # Register the signal handlers
+    signal.signal(signal.SIGINT, save_and_exit)
+    signal.signal(signal.SIGTERM, save_and_exit)
 
-    env.close()
+    try:
+        for i in range(num_episodes):
+            print("Episode:", i)
+            total_reward = run_episode(env, agent, SHOULD_TRAIN)
+            print("Total reward:", total_reward, "Epsilon:", agent.epsilon, 
+                    "Size of replay buffer:", len(agent.replay_buffer), 
+                    "Learn step counter:", agent.learn_step_counter)
+
+            if SHOULD_TRAIN and (i + 1) % CKPT_SAVE_INTERVAL == 0:
+                save_model(agent, model_path, i + 1)
+
+    except Exception as e:
+        print(f"Exception occurred: {e}. Saving model...")
+        save_model(agent, model_path, "final")
+        raise
+    finally:
+        env.close()
 
 def game_settings(env, movement_set):
     # Ensure the environment is wrapped correctly
