@@ -1,4 +1,4 @@
-cloudpickle==3.0.0
+python -m ensurepipcloudpickle==3.0.0
 colorama==0.4.6
 filelock==3.13.1
 fsspec==2024.2.0
