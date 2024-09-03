@@ -5,6 +5,14 @@
 />
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/build-passed-green?logo=python" alt="Static Badge">
+  <img src="https://img.shields.io/github/commit-activity/t/Luc4st1574/Games-NESPY-RL" alt="GitHub commit activity">
+  <img src="https://img.shields.io/github/release-date/Luc4st1574/Games-NESPY-RL" alt="GitHub Release Date">
+  <img src="https://img.shields.io/github/languages/count/Luc4st1574/Games-NESPY-RL" alt="GitHub language count">
+  <img src="https://img.shields.io/cii/level/1?logo=python" alt="CII Best Practices">
+</p>
+
 This is a Reinforcement Learning repository, using nespy wrappers in order to get your own ai model to learn to play a bunch of games from the nes, like mario bros 1 and 2, The legend of Zelda and Tetris
 
 This project uses the [NES-PY](https://github.com/Kautenja/nes-py) emulator and the gym enviroments from [Kautenja](https://github.com/Kautenja), so please follow him for more.
