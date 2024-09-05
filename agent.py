@@ -48,19 +48,18 @@ class ModelNN(nn.Module):
             
 class Agent:
     def __init__(self, input_dims, num_actions, 
-                                                    lr=0.00025, 
-                                                    gamma=0.9, 
-                                                    epsilon=1.0, 
-                                                    eps_decay=0.99999975, 
-                                                    eps_min=0.1, 
-                                                    replay_buffer_capacity=10000, #100000
-                                                    batch_size=32, 
-                                                    sync_network_rate=10000):
+                    lr=0.00025, 
+                    gamma=0.9, 
+                    epsilon=1.0, 
+                    eps_decay=0.99999975, 
+                    eps_min=0.1, 
+                    replay_buffer_capacity=10000,
+                    batch_size=32, 
+                    sync_network_rate=10000):
         
         self.num_actions = num_actions
         self.learn_step_counter = 0
         
-        # Hyperparameters
         self.lr = lr
         self.gamma = gamma
         self.epsilon = epsilon
@@ -69,17 +68,14 @@ class Agent:
         self.batch_size = batch_size
         self.sync_network_rate = sync_network_rate
         
-        # Networks
         self.online_network = ModelNN(input_dims, num_actions)
         self.target_network = ModelNN(input_dims, num_actions, freeze=True)
 
-        # Optimizer and loss
         self.optimizer = torch.optim.Adam(self.online_network.parameters(), lr=self.lr)
         self.loss = torch.nn.MSELoss()
         
-        # Replay buffer
         storage = LazyMemmapStorage(replay_buffer_capacity)
-        self.replay_buffer = TensorDictReplayBuffer(storage=storage)
+        self.replay_buffer = TensorDictReplayBuffer(storage=storage, batch_size=batch_size)
         
     def choose_action(self, state):
         if np.random.random() < self.epsilon:
@@ -105,11 +101,24 @@ class Agent:
             self.target_network.load_state_dict(self.online_network.state_dict())
             
     def save_model(self, path):
-        torch.save(self.online_network.state_dict(), path)
+        torch.save({
+            'online_network_state_dict': self.online_network.state_dict(),
+            'target_network_state_dict': self.target_network.state_dict(),
+            'optimizer_state_dict': self.optimizer.state_dict(),
+            'epsilon': self.epsilon,
+            'learn_step_counter': self.learn_step_counter,
+        }, path)
+        print(f"Model saved to {path}")
 
     def load_model(self, path):
-        self.online_network.load_state_dict(torch.load(path))
-        self.target_network.load_state_dict(torch.load(path))
+        checkpoint = torch.load(path)
+        self.online_network.load_state_dict(checkpoint['online_network_state_dict'])
+        self.target_network.load_state_dict(checkpoint['target_network_state_dict'])
+        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        self.epsilon = checkpoint['epsilon']
+        self.learn_step_counter = checkpoint['learn_step_counter']
+        print(f"Model loaded from {path}")
+        print(f"Epsilon: {self.epsilon}, Learn step counter: {self.learn_step_counter}")
     
     def learn(self):
         if len(self.replay_buffer) < self.batch_size:
