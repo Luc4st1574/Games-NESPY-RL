@@ -36,7 +36,7 @@ def run_episode(env, agent, SHOULD_TRAIN):
     return total_reward
 
 def save_model(agent, model_folder, episode_num, game_name):
-    model_path = os.path.join(model_folder, f"{game_name}_model_{episode_num}_iter.pt")
+    model_path = os.path.join(model_folder, f"{game_name}_model.pt")
     agent.save_model(model_path)
     print(f"Model saved to {model_path}")
 
